@@ -30,6 +30,15 @@ extern "C" {
         env->ReleaseByteArrayElements(array, bufferPtr, 0);  
     }
 }
+#elif  (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
+#ifndef GLFW_EXPOSE_NATIVE_WIN32
+#define GLFW_EXPOSE_NATIVE_WIN32
+#endif
+
+#ifndef GLFW_EXPOSE_NATIVE_WGL
+#define GLFW_EXPOSE_NATIVE_WGL
+#endif
+#include "glfw3native.h"
 #endif
 
 void ImagePickerImpl::openImage()
@@ -44,6 +53,38 @@ void ImagePickerImpl::openImage()
     }
     else
         ImagePicker::getInstance()->finishImage(nullptr);
+#elif (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
+	GLView *glView = Director::getInstance()->getOpenGLView();
+	GLFWwindow *glfwWindow = glView->getWindow();
+	HWND hwnd = glfwGetWin32Window(glfwWindow);
+    
+	OPENFILENAME ofn;       // common dialog box structure
+	WCHAR szFile[256] = {0};       // buffer for filename
+    
+	// Initialize OPENFILENAME
+	ZeroMemory(&ofn, sizeof(OPENFILENAME));
+	ofn.lStructSize = sizeof(OPENFILENAME);
+	ofn.hwndOwner = hwnd;
+	ofn.lpstrFile = szFile;
+	ofn.nMaxFile = sizeof(szFile);
+	ofn.lpstrFilter = L"Images\0*.png;*.jpeg;*.jpg\0"
+    L"All\0*.*\0";
+	ofn.nFilterIndex = 1;
+	ofn.lpstrFileTitle = NULL;
+	ofn.nMaxFileTitle = 0;
+	ofn.lpstrInitialDir = NULL;
+	ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
+	if(GetOpenFileName(&ofn)){
+		char temp[256];
+		const char DefChar = ' ';
+		WideCharToMultiByte(CP_ACP,0,szFile,-1, temp,256, &DefChar, NULL);
+        
+		Texture2D* texture = Director::getInstance()->getTextureCache()->addImage(std::string(temp));
+		ImagePicker::getInstance()->finishImage(texture);
+	}
+	else{
+		ImagePicker::getInstance()->finishImage(nullptr);
+	}
 #else
     ImagePicker::getInstance()->finishImage(nullptr);
 #endif

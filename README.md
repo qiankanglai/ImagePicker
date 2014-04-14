@@ -8,7 +8,9 @@ This utility lets you load images from device gallery and load it to your applic
 The origin project is https://github.com/Losiowaty/ImagePicker, and I clear the whole project, in addition to:
 
 - add support for iPhone (combined with iPad)
+- add support for Win32
 - take advantage of ccx 3.0 API
+- other platforms like Mac is able to compile
 
 ps. The image is loaded by platform API and deliveried to ccx in memory directly. No repeated IO is needed.
 
@@ -17,7 +19,7 @@ Guide
 Installation
 ------------
 
-1. iOS
+1. iOS/Mac
 
 Add the following sources into project:
 
@@ -25,7 +27,7 @@ Add the following sources into project:
 - ImagePickerImpl.h, ImagePickerImpl.mm
 - ImagePickerIOS.h, ImagePickerIOS.mm
 
-2. Android
+2. Android/Win32
 
 - ImagePicker.h, ImagePicker.cpp
 - ImagePickerImpl.h, ImagePickerImpl.cpp
