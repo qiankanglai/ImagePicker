@@ -21,6 +21,7 @@ extern "C" {
     
             Texture2D* pTexture = new Texture2D();
             pTexture->initWithImage(imf);
+            pTexture->autorelease();
 
             ImagePicker::getInstance()->finishImage(pTexture);
         }

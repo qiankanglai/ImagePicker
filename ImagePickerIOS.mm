@@ -23,17 +23,25 @@
 {
     UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
     
-    NSData *imgData = UIImagePNGRepresentation(image);
-    NSUInteger len = [imgData length];
-    Byte *byteData = (Byte*)malloc(len);
-    memcpy(byteData, [imgData bytes], len);
-    
     cocos2d::Image *imf =new cocos2d::Image();
-    imf->initWithImageData(byteData,imgData.length);
     imf->autorelease();
+    
+    @autoreleasepool
+    {
+        NSData *imgData = UIImagePNGRepresentation(image);
+        NSUInteger len = [imgData length];
+        
+        Byte *byteData = (Byte*)malloc(len);
+        memcpy(byteData, [imgData bytes], len);
+    
+        imf->initWithImageData(byteData, len);
+        
+        free(byteData);
+    }
     
     cocos2d::Texture2D* pTexture = new cocos2d::Texture2D();
     pTexture->initWithImage(imf);
+    pTexture->autorelease();
 
     ImagePicker::getInstance()->finishImage(pTexture);
     
