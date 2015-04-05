@@ -57,7 +57,10 @@ void ImagePickerImpl::openImage()
 #elif (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
 	GLView *glView = Director::getInstance()->getOpenGLView();
 	GLFWwindow *glfwWindow = glView->getWindow();
-	HWND hwnd = glfwGetWin32Window(glfwWindow);
+    //GLFWwindow *glfwWindow = glView->getWindow();
+    //HWND hwnd = glfwGetWin32Window(glfwWindow);
+    // ccx 3.5 new API
+    HWND hwnd = glView->getWin32Window();
     
 	OPENFILENAME ofn;       // common dialog box structure
 	WCHAR szFile[256] = {0};       // buffer for filename

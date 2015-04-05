@@ -3,11 +3,9 @@
 
 #include "cocos2d.h"
 
-using namespace cocos2d;
-
 class ImagePickerDelegate {
 public:
-    virtual void didFinishPickingWithResult(Texture2D* result) = 0;
+    virtual void didFinishPickingWithResult(cocos2d::Texture2D* result) = 0;
 };
 
 class ImagePicker{

@@ -1,7 +1,7 @@
 #import <QuartzCore/QuartzCore.h>
 
-#import "CCDirector.h"
-#import "CCEAGLView.h"
+//#import "CCDirector.h"
+//#import "CCEAGLView.h"
 
 #import "ImagePicker.h"
 #import "ImagePickerIOS.h"
@@ -15,7 +15,8 @@
     [imagePicker setDelegate:self];
     imagePicker.wantsFullScreenLayout = YES;
     
-    CCEAGLView *view = (CCEAGLView *)cocos2d::Director::getInstance()->getOpenGLView()->getEAGLView();
+    // CCEAGLView is a subclass of UIView
+    UIView *view = (UIView *)cocos2d::Director::getInstance()->getOpenGLView()->getEAGLView();
     [view addSubview:imagePicker.view];
 }
 

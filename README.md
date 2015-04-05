@@ -1,16 +1,18 @@
 ImagePicker
 ===========
 
-ImagePicker utility for cocos2d-x 3.0.
+ImagePicker utility for cocos2d-x 3.5 
+
+Attention: Old version cocos2d-x may have some differences in API. If you encounter problems here, feel free to contact me :D
 
 This utility lets you load images from device gallery and load it to your application as a Texture2D. You may draw Sprite with this texture or use it in other ways.
 
 The origin project is https://github.com/Losiowaty/ImagePicker, and I clear the whole project, in addition to:
 
 - add support for iPhone (combined with iPad)
-- add support for Win32
-- take advantage of ccx 3.0 API
-- other platforms like Mac is able to compile
+- add support for Win32/OSX
+- put Android support together
+- take advantage of ccx 3.x API
 
 ps. The image is loaded by platform API and deliveried to ccx in memory directly. No repeated IO is needed.
 
