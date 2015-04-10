@@ -1,6 +1,8 @@
 ImagePicker
 ===========
 
+**The newest code can be found here: https://github.com/cocos2d/cocos2d-x/pull/11344. I've put all the codes into cocos2d-x 3.5 along with tests. Also win8.1-universal is supported now.**
+
 ImagePicker utility for cocos2d-x 3.5 
 
 **Attention**
