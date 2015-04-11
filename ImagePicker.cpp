@@ -1,7 +1,15 @@
+// Image Picker for cocos2d-x
+// @Author: Kanglai Qian
+// @url: https://github.com/qiankanglai/ImagePicker
+
 #include "ImagePicker.h"
 #include "ImagePickerImpl.h"
 
-ImagePicker*  sharedPicker = nullptr;
+#include "cocos2d.h"
+
+using namespace cocos2d;
+
+static ImagePicker* sharedPicker = nullptr;
 
 ImagePicker::ImagePicker(){
     _delegate = nullptr;

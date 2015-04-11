@@ -1,12 +1,16 @@
-#include "cocos2d.h"
+// Image Picker for cocos2d-x
+// @Author: Kanglai Qian
+// @url: https://github.com/qiankanglai/ImagePicker
 
 #include "ImagePicker.h"
 #include "ImagePickerImpl.h"
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-#include "ImagePickerIOS.h"
+#include "ImagePicker-ios.h"
 static ImagePickerIOS *sharedPicker = [[[ImagePickerIOS alloc] init] retain];
 #endif
+
+#include "cocos2d.h"
 
 using namespace cocos2d;
 
@@ -36,7 +40,7 @@ void ImagePickerImpl::openImage()
         ImagePicker::getInstance()->finishImage(nullptr);
     }
 #else
-    // unknown platform?
+    CCLOG("ImagePickerImpl: unsupported yet");
     ImagePicker::getInstance()->finishImage(nullptr);
 #endif
 }
