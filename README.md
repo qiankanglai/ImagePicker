@@ -51,23 +51,24 @@ Add the following sources into project according to different platforms (Files a
     - App.Shared
         - App.xaml.h, App.xaml.cpp (WP)
 
-3. JSB
+- JSB
 
-- jsb_cocos2dx_extension_ImagePicker.hpp
-- jsb_cocos2dx_extension_ImagePicker.cpp
+    - jsb_cocos2dx_extension_ImagePicker.hpp, jsb_cocos2dx_extension_ImagePicker.cpp
 
-4. Tests (optional)
+- Tests (optional)
 
-- ImagePickerTest.h, ImagePickerTest.cpp
+    - ImagePickerTest.h, ImagePickerTest.cpp
 
-5. Example Usage
+- Example Usage
 
-- HelloWorldScene.h, HelloWorldScene.cpp
+    - HelloWorldScene.h, HelloWorldScene.cpp
 
 Usage
 -----
 
-Just call `ImagePicker::getInstance()->pickImage()` and pass in your delegate. If the image is picked successfully, your delegate will receive the corresponding Texture2D, or nullptr otherwise. An example usage could be found in HelloWorldScene.
+Just call `ImagePicker::getInstance()->pickImage()` and pass in your delegate. If the image is picked successfully, your delegate will receive the corresponding Texture2D, or nullptr otherwise. An example could be found in HelloWorldScene.
+
+**Attention** Please don't try get the texture **immediately after** `pickImage`. You have to wait for the system and this is why I'm using delegate!
 
 For cocos2d-JS users: add `sc->addRegisterCallback(register_all_cocos2dx_extension_ImagePicker);` in AppDelegate.cpp,
 
