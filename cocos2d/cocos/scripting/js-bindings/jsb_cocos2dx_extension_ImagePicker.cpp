@@ -40,8 +40,8 @@ static bool dummy_constructor(JSContext *cx, uint32_t argc, jsval *vp) {
         typeClass = typeMapIter->second;
         CCASSERT(typeClass, "The value is null.");
 
-        JS::RootedObject proto(cx, typeClass->proto.get());
-        JS::RootedObject parent(cx, typeClass->parentProto.get());
+        JS::RootedObject proto(cx, typeClass->proto.ref());
+        JS::RootedObject parent(cx, typeClass->parentProto.ref());
         JS::RootedObject _tmp(cx, JS_NewObject(cx, typeClass->jsclass, proto, parent));
         
         T* cobj = new T();
@@ -107,8 +107,8 @@ bool js_cocos2dx_extension_ImagePickerDelegate_constructor(JSContext *cx, uint32
     typeClass = typeMapIter->second;
     CCASSERT(typeClass, "The value is null.");
     // JSObject *obj = JS_NewObject(cx, typeClass->jsclass, typeClass->proto, typeClass->parentProto);
-    JS::RootedObject proto(cx, typeClass->proto.get());
-    JS::RootedObject parent(cx, typeClass->parentProto.get());
+    JS::RootedObject proto(cx, typeClass->proto.ref());
+    JS::RootedObject parent(cx, typeClass->parentProto.ref());
     JS::RootedObject obj(cx, JS_NewObject(cx, typeClass->jsclass, proto, parent));
     args.rval().set(OBJECT_TO_JSVAL(obj));
     // link the native object with the javascript object
@@ -183,8 +183,8 @@ void js_register_cocos2dx_extension_ImagePickerDelegate(JSContext *cx, JS::Handl
     {
         p = (js_type_class_t *)malloc(sizeof(js_type_class_t));
         p->jsclass = jsb_cocos2d_ImagePickerDelegate_class;
-        p->proto = jsb_cocos2d_ImagePickerDelegate_prototype;
-        p->parentProto = NULL;
+        p->proto.ref() = jsb_cocos2d_ImagePickerDelegate_prototype;
+        p->parentProto.ref() = NULL;
         _js_global_type_map.insert(std::make_pair(typeName, p));
     }
 }
@@ -280,8 +280,8 @@ bool js_cocos2dx_extension_ImagePicker_constructor(JSContext *cx, uint32_t argc,
     typeClass = typeMapIter->second;
     CCASSERT(typeClass, "The value is null.");
     // JSObject *obj = JS_NewObject(cx, typeClass->jsclass, typeClass->proto, typeClass->parentProto);
-    JS::RootedObject proto(cx, typeClass->proto.get());
-    JS::RootedObject parent(cx, typeClass->parentProto.get());
+    JS::RootedObject proto(cx, typeClass->proto.ref());
+    JS::RootedObject parent(cx, typeClass->parentProto.ref());
     JS::RootedObject obj(cx, JS_NewObject(cx, typeClass->jsclass, proto, parent));
     args.rval().set(OBJECT_TO_JSVAL(obj));
     // link the native object with the javascript object
@@ -360,8 +360,8 @@ void js_register_cocos2dx_extension_ImagePicker(JSContext *cx, JS::HandleObject 
     {
         p = (js_type_class_t *)malloc(sizeof(js_type_class_t));
         p->jsclass = jsb_cocos2d_ImagePicker_class;
-        p->proto = jsb_cocos2d_ImagePicker_prototype;
-        p->parentProto = NULL;
+        p->proto.ref() = jsb_cocos2d_ImagePicker_prototype;
+        p->parentProto.ref() = NULL;
         _js_global_type_map.insert(std::make_pair(typeName, p));
     }
 }
